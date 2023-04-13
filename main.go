@@ -60,8 +60,8 @@ type Range struct {
 	End int
 }
 
-type ByStartIndex []overlay
+type byStartIndex []overlay
 
-func (a ByStartIndex) Len() int           { return len(a) }
-func (a ByStartIndex) Swap(i, j int)      { a[i], a[j] = a[j], a[i] }
-func (a ByStartIndex) Less(i, j int) bool { return a[i].span.Pos < a[j].span.Pos }
+func (a byStartIndex) Len() int           { return len(a) }
+func (a byStartIndex) Swap(i, j int)      { a[i], a[j] = a[j], a[i] }
+func (a byStartIndex) Less(i, j int) bool { return a[i].span.Pos < a[j].span.Pos }

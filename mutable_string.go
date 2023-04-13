@@ -47,7 +47,7 @@ The Commit method is useful when performing batch string transformations, as it 
 to be applied to the initial text in a single operation, reducing the number of intermediate allocations and copies.
 */
 func (ms *MutableString) Commit() error {
-	sort.Sort(ByStartIndex(ms.overlays))
+	sort.Sort(byStartIndex(ms.overlays))
 	rawText := []rune(ms.initialText)
 
 	builder := strings.Builder{}
