@@ -11,17 +11,17 @@ overlays are applied to the initial text in the order they were added, resulting
 
 The package provides a set of methods for creating and manipulating MutableString instances, including:
 
-  - ReplaceRange: Adds an overlay that specifies a range of characters in the initial text to be replaced
-    with the provided replacement text. The range is defined by a starting position (inclusive) and an ending
-    position (exclusive). If the replacement text is empty, this operation effectively performs a deletion.
+- ReplaceRange: Adds an overlay that specifies a range of characters in the initial text to be replaced
+  with the provided replacement text. The range is defined by a starting position (inclusive) and an ending
+  position (exclusive). If the replacement text is empty, this operation effectively performs a deletion.
 
-  - Insert: Adds an overlay that inserts the provided text at the end of the initial text. This operation
-    extends the length of the initial text.
+- Insert: Adds an overlay that inserts the provided text at the end of the initial text. This operation
+  extends the length of the initial text.
 
-  - Commit: Applies all accumulated overlays to the initial text. After the Commit
-    operation, the initial text is updated to the final transformed string, and the list of overlays is cleared.
-    The Commit method ensures that no overlapping overlays are applied; if it detects any overlaps, it returns
-    an error.
+- Commit: Applies all accumulated overlays to the initial text. After the Commit
+  operation, the initial text is updated to the final transformed string, and the list of overlays is cleared.
+  The Commit method ensures that no overlapping overlays are applied; if it detects any overlaps, it returns
+  an error.
 
 MutableString is designed to handle batch string transformations efficiently. By deferring the actual application
 of modifications, the package reduces the number of intermediate string allocations and copies that would be
@@ -31,7 +31,7 @@ and a sequence of complex transformations.
 Usage:
 
 ```
-ms := MutableString{initialText: "hello world"}
+ms := NewMutableString("hello world")
 ms.ReplaceRange(Range{Pos: 0, End: 5}, "hi") // Replace "hello" with "hi"
 ms.Insert(5, " there")                       // Insert " there" in between "hello" and " world"
 ms.Append("!")                               // Insert "!" at the end.

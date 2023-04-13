@@ -11,6 +11,13 @@ type MutableString struct {
 	overlays    []overlay
 }
 
+func NewMutableString(text string) MutableString {
+	return MutableString{
+		initialText: text,
+		overlays:    []overlay{},
+	}
+}
+
 /*
 Commit applies all accumulated overlays to the initial text, resulting in the final
 transformed string. The overlays represent string modifications such as insertions, deletions, and replacements.
@@ -25,7 +32,7 @@ position of the previous overlay.
 
 Example usage:
 
-	ms := MutableString{initialText: "hello world"}
+	ms := NewMutableString("hello world")
 	ms.ReplaceRange(Range{Pos: 0, End: 5}, "hi") // Replace "hello" with "hi"
 	ms.Insert(5, " there")                       // Insert " there" in between "hello" and " world"
 	ms.Append("!")                               // Insert "!" at the end.
@@ -116,7 +123,7 @@ the behavior is undefined, and the method may return an error during the Commit 
 
 Example usage:
 
-	ms := MutableString{initialText: "hello world"}
+	ms := NewMutableString("hello world")
 	ms.DeleteRange(Range{Pos: 6, End: 11}) // Delete "world"
 	err := ms.Commit()
 	if err != nil {

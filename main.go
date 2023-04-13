@@ -31,7 +31,7 @@ and a sequence of complex transformations.
 
 Usage:
 
-	ms := MutableString{initialText: "hello world"}
+	ms := NewMutableString("hello world")
 	ms.ReplaceRange(Range{Pos: 0, End: 5}, "hi") // Replace "hello" with "hi"
 	ms.Insert(5, " there")                       // Insert " there" in between "hello" and " world"
 	ms.Append("!")                               // Insert "!" at the end.
