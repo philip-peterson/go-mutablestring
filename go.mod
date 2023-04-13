@@ -1,3 +1,3 @@
-module github.com/philip-peterson/go-mutablestring/v2
+module github.com/philip-peterson/go-mutablestring
 
 go 1.17
