@@ -36,17 +36,17 @@ Example usage:
 	ms.ReplaceRange(Range{Pos: 0, End: 5}, "hi") // Replace "hello" with "hi"
 	ms.Insert(5, " there")                       // Insert " there" in between "hello" and " world"
 	ms.Append("!")                               // Insert "!" at the end.
-	err := ms.Commit()                           // Apply the overlays
+	res, err := ms.Commit()                           // Apply the overlays
 	if err != nil {
 		fmt.Println(err)
 	} else {
-		fmt.Println(ms.initialText) // Output: "hi there world!"
+		fmt.Println(res) // Output: "hi there world!"
 	}
 
 The Commit method is useful when performing batch string transformations, as it allows for multiple modifications
 to be applied to the initial text in a single operation, reducing the number of intermediate allocations and copies.
 */
-func (ms *MutableString) Commit() error {
+func (ms *MutableString) Commit() (string, error) {
 	sort.Sort(byStartIndex(ms.overlays))
 	rawText := []rune(ms.initialText)
 
@@ -61,7 +61,7 @@ func (ms *MutableString) Commit() error {
 		if i > 0 {
 			prevOverlay = &ms.overlays[i-1]
 			if overlay.span.Pos < prevOverlay.span.End {
-				return fmt.Errorf("ranges overlap")
+				return "", fmt.Errorf("ranges overlap")
 			}
 		}
 
@@ -83,7 +83,7 @@ func (ms *MutableString) Commit() error {
 	ms.initialText = builder.String()
 	ms.overlays = make([]overlay, 0, INITIAL_CAPACITY)
 
-	return nil
+	return ms.initialText, nil
 }
 
 // ReplaceRange adds an overlay to replace the specified range with the provided text.
@@ -125,11 +125,11 @@ Example usage:
 
 	ms := NewMutableString("hello world")
 	ms.DeleteRange(Range{Pos: 6, End: 11}) // Delete "world"
-	err := ms.Commit()
+	res, err := ms.Commit()
 	if err != nil {
 	    fmt.Println(err)
 	} else {
-	    fmt.Println(ms.initialText) // Output: "hello "
+	    fmt.Println(res) // Output: "hello "
 	}
 */
 func (ms *MutableString) DeleteRange(r Range) error {

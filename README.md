@@ -35,11 +35,11 @@ ms := NewMutableString("hello world")
 ms.ReplaceRange(Range{Pos: 0, End: 5}, "hi") // Replace "hello" with "hi"
 ms.Insert(5, " there")                       // Insert " there" in between "hello" and " world"
 ms.Append("!")                               // Insert "!" at the end.
-err := ms.Commit()                           // Apply the overlays
+res, err := ms.Commit()                      // Apply the overlays
 if err != nil {
 	fmt.Println(err)
 } else {
-	fmt.Println(ms.initialText) // Output: "hi there world!"
+	fmt.Println(res) // Output: "hi there world!"
 }
 ```
 

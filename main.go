@@ -16,11 +16,11 @@ The package provides a set of methods for creating and manipulating MutableStrin
     with the provided replacement text. The range is defined by a starting position (inclusive) and an ending
     position (exclusive). If the replacement text is empty, this operation effectively performs a deletion.
 
-  - Insert: Adds an overlay that inserts the provided text at the end of the initial text. This operation
-    extends the length of the initial text.
+  - Insert: Adds an overlay that inserts the provided text at a specified character position. This operation
+    extends the length of the resultant text.
 
   - Commit: Applies all accumulated overlays to the initial text. After the Commit
-    operation, the initial text is updated to the final transformed string, and the list of overlays is cleared.
+    operation, the resultant text is updated to the final transformed string, and the list of overlays is cleared.
     The Commit method ensures that no overlapping overlays are applied; if it detects any overlaps, it returns
     an error.
 
@@ -35,11 +35,11 @@ Usage:
 	ms.ReplaceRange(Range{Pos: 0, End: 5}, "hi") // Replace "hello" with "hi"
 	ms.Insert(5, " there")                       // Insert " there" in between "hello" and " world"
 	ms.Append("!")                               // Insert "!" at the end.
-	err := ms.Commit()                           // Apply the overlays
+	res, err := ms.Commit()                           // Apply the overlays
 	if err != nil {
 		fmt.Println(err)
 	} else {
-		fmt.Println(ms.initialText) // Output: "hi there world!"
+		fmt.Println(res) // Output: "hi there world!"
 	}
 
 The package is intended for use cases where batch string manipulation is needed, such as text editors, document
