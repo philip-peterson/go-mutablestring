@@ -81,7 +81,7 @@ func (ms *MutableString) Commit() (string, error) {
 	}
 
 	ms.initialText = builder.String()
-	ms.overlays = make([]overlay, 0, INITIAL_CAPACITY)
+	ms.overlays = make([]overlay, 0, initialCapacity)
 
 	return ms.initialText, nil
 }

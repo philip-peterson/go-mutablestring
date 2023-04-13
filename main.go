@@ -48,7 +48,7 @@ complex string transformations.
 */
 package mutable_string
 
-const INITIAL_CAPACITY = 3
+const initialCapacity = 3
 
 type overlay struct {
 	span Range

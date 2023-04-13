@@ -16,7 +16,7 @@ func TestCommit(t *testing.T) {
 			initialText: "hello world",
 			overlays:    []overlay{},
 		}
-		err := ms.Commit()
+		_, err := ms.Commit()
 		if err != nil {
 			t.Errorf("Unexpected error: %v", err)
 			return
@@ -35,7 +35,7 @@ func TestCommit(t *testing.T) {
 				{span: Range{Pos: 0, End: 5}, text: "hi"},
 			},
 		}
-		err := ms.Commit()
+		_, err := ms.Commit()
 		if err != nil {
 			t.Errorf("Unexpected error: %v", err)
 			return
@@ -55,7 +55,7 @@ func TestCommit(t *testing.T) {
 				{span: Range{Pos: 3, End: 8}, text: "planet"},
 			},
 		}
-		err := ms.Commit()
+		_, err := ms.Commit()
 		if err == nil {
 			t.Error("Expected an error, but got nil")
 		}
@@ -69,7 +69,7 @@ func TestCommit(t *testing.T) {
 				{span: Range{Pos: 6, End: 11}, text: "planet"},
 			},
 		}
-		err := ms.Commit()
+		_, err := ms.Commit()
 		if err != nil {
 			t.Errorf("Unexpected error: %v", err)
 			return
@@ -89,7 +89,7 @@ func TestCommit(t *testing.T) {
 				{span: Range{Pos: 5, End: 11}, text: " planet"},
 			},
 		}
-		err := ms.Commit()
+		_, err := ms.Commit()
 		if err != nil {
 			t.Errorf("Unexpected error: %v", err)
 			return
@@ -110,7 +110,7 @@ func TestCommit(t *testing.T) {
 				{span: Range{Pos: 6, End: 11}, text: "planet"},
 			},
 		}
-		err := ms.Commit()
+		_, err := ms.Commit()
 		if err != nil {
 			t.Errorf("Unexpected error: %v", err)
 			return
@@ -129,7 +129,7 @@ func TestCommit(t *testing.T) {
 				{span: Range{Pos: 0, End: 0}, text: "hello"},
 			},
 		}
-		err := ms.Commit()
+		_, err := ms.Commit()
 		if err != nil {
 			t.Errorf("Unexpected error: %v", err)
 			return
@@ -149,7 +149,7 @@ func TestInsert(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Unexpected error: %v", err)
 	}
-	err = ms.Commit()
+	_, err = ms.Commit()
 	if err != nil {
 		t.Fatalf("Unexpected error: %v", err)
 	}
@@ -165,7 +165,7 @@ func TestDeleteRange(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Unexpected error: %v", err)
 	}
-	err = ms.Commit()
+	_, err = ms.Commit()
 	if err != nil {
 		t.Fatalf("Unexpected error: %v", err)
 	}
